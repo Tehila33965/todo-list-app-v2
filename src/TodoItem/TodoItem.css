@@ -1,0 +1,82 @@
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border-right: 5px solid;
+  background: #f9fafb;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.todo-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* צבעים לפי סטטוס */
+.todo-item.done {
+  border-color: #16a34a;
+  background: #f0fdf4;
+}
+
+.todo-item.done .todo-title {
+  color: #15803d;
+  text-decoration: line-through;
+}
+
+.todo-item.pending {
+  border-color: #dc2626;
+  background: #fef2f2;
+}
+
+.todo-item.pending .todo-title {
+  color: #b91c1c;
+}
+
+.todo-item.editing {
+  box-shadow: 0 0 0 2px #4f46e5;
+}
+
+.todo-title {
+  flex: 1;
+  font-size: 17px;
+}
+
+.editing-badge {
+  font-size: 12px;
+  background: #4f46e5;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.todo-actions button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #fff;
+  transition: opacity 0.2s;
+}
+
+.todo-actions button:hover {
+  opacity: 0.85;
+}
+
+.btn-done {
+  background: #16a34a;
+}
+
+.btn-edit {
+  background: #f59e0b;
+}
+
+.btn-delete {
+  background: #ef4444;
+}

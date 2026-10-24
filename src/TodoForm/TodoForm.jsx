@@ -1,29 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import "./TodoForm.css";
 
-const TodoForm = ({ onAddTask }) => {
-  const [newTitle, setNewTitle] = useState("");
+const TodoForm = ({ onAddTask, onUpdateTask, editingTask, onCancelEdit }) => {
+    const [newTitle, setNewTitle] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    // כשנבחרת משימה לעריכה - ממלאים את האינפוט בכותרת שלה
+    useEffect(() => {
+        if (editingTask) {
+            setNewTitle(editingTask.title);
+        } else {
+            setNewTitle("");
+        }
+    }, [editingTask]);
 
-    const title = newTitle.trim();
-    if (!title) return;
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    onAddTask(title);
-    setNewTitle("");
-  };
+        const title = newTitle.trim();
+        if (!title) return;
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="משימה חדשה"
-        value={newTitle}
-        onChange={(e) => setNewTitle(e.target.value)}
-      />
-      <button type="submit">אישור</button>
-    </form>
-  );
+        if (editingTask) {
+            onUpdateTask(editingTask.id, title);
+        } else {
+            onAddTask(title);
+        }
+
+        setNewTitle("");
+    };
+
+    return (
+        <form className="todo-form" onSubmit={handleSubmit}>
+            <input
+                type="text"
+                placeholder={editingTask ? "עריכת משימה" : "משימה חדשה"}
+                value={newTitle}
+                onChange={(e) => setNewTitle(e.target.value)}
+            />
+            <button type="submit" className="btn-submit">
+                {editingTask ? "עדכון" : "אישור"}
+            </button>
+            {editingTask && (
+                <button type="button" className="btn-cancel" onClick={onCancelEdit}>
+                    ביטול
+                </button>
+            )}
+        </form>
+    );
 };
 
 export default TodoForm;
