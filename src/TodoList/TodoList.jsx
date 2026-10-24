@@ -1,4 +1,5 @@
 import { useState } from "react";
+import TodoItem from "../TodoItem/TodoItem";
 
 const TodoList = () => {
   const [tasks, setTasks] = useState([
@@ -12,7 +13,12 @@ const TodoList = () => {
       <h2>רשימת משימות</h2>
       <ul>
         {tasks.map((task) => (
-          <li key={task.id}>{task.title}</li>
+          <TodoItem
+            key={task.id}
+            id={task.id}
+            title={task.title}
+            isDone={task.isDone}
+          />
         ))}
       </ul>
     </div>
