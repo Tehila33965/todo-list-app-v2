@@ -37,6 +37,13 @@ const TodoList = () => {
 //     setNewTitle("");
 // };
 
+  const markAsDone = (id) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, isDone: true } : task
+    );
+
+    setTasks(updatedTasks);
+  };
 
   return (
     <div>
@@ -51,6 +58,7 @@ const TodoList = () => {
             id={task.id}
             title={task.title}
             isDone={task.isDone}
+            onMarkAsDone={markAsDone}
           />
         ))}
       </ul>
